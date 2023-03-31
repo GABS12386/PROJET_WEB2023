@@ -8,3 +8,6 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+#exclusion du repertoire de configuration de PHPStorm
+/database
