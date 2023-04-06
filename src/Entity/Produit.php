@@ -25,6 +25,14 @@ class Produit
     #[ORM\ManyToOne(inversedBy: 'idproduit')]
     private ?Panier $panier = null;
 
+
+    public function __construct()
+    {
+        $this->panier=null;
+        $this->id=null;
+        $this->libelle=null;
+        $this->prix=null;
+    }
     public function getId(): ?int
     {
         return $this->id;

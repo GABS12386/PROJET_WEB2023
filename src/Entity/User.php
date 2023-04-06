@@ -37,6 +37,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $birthday = null;
 
+    public function __construct()
+    {
+        $this->id=null;
+        $this->nom=null;
+        $this->prenom=null;
+        $this->birthday=null;
+        $this->roles=[];
+    }
     public function getId(): ?int
     {
         return $this->id;

@@ -18,6 +18,7 @@ class Panier
     #[ORM\OneToMany(mappedBy: 'panier', targetEntity: Produit::class)]
     private Collection $idproduit;
 
+
     public function __construct()
     {
         $this->idproduit = new ArrayCollection();
