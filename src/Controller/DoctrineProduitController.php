@@ -25,6 +25,6 @@ class DoctrineProduitController extends AbstractController
         $em->flush();
         dump($produit);
 
-        return $this->redirectToRoute();
+        return $this->redirectToRoute('Produit_controller.html.twig',['libelle' => $produit->getLibelle()]);
     }
 }

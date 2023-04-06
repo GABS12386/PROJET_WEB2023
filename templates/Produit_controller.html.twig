@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<strong>LES PRODUITS<\strong>
+{# Récupération des données depuis la base de donnée #}
+{% set produits = app.repository('App\\Entity\\Produit').findAll%}
+   <select name="produit">
+    {%for produit in produits %}
+        <option value="{{produit.id}}">{{category.name}}</option>
+     {% endfor %}
+   </select>
+
+{% endblock %}
