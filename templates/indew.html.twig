@@ -1,10 +1,26 @@
-{% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Bienvenue sur notre site de vente en ligne</h1>
 
-    <h2>Nos produits :</h2>
-    <ul>
-       <li>VOICI NOS PRODUITS</li>
-    </ul>
+{% block title %}PRODUITS{% endblock %}
+
+{% block vue %}
+    <p><a href="{{ path('ajout_produit') }}">Ajouter un produit</a></p>
+
+    <p>
+        {% if page == 0 %}
+            affichage de toutes les pages
+        {% else %}
+            affichage de la page {{ page }}
+        {% endif %}
+    </p>
+
+    {% if produits|length == 0 %}
+        <p>Aucun produits dans la base de données</p>
+    {% else %}
+        <table>
+            <tr><th>dénomination</th><th></th></tr>
+            {% for produit in produits %}
+            {% endfor %}
+        </table>
+    {% endif %}
+
 {% endblock %}

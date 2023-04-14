@@ -5,3 +5,7 @@ controllers:
     type: attribute
 # config/routes.yaml
 
+login:
+    path: /login
+    controller: App\Contoller\SecurityController::login
+
