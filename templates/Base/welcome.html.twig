@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Bienvenue sur notre site web!</h1>
+
+    {% if message is defined %}
+        <p>{{ message }}</p>
+    {% endif %}
+{% endblock %}
