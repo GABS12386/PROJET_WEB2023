@@ -16,6 +16,11 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            custom_authenticator: App\Security\MyLoginFormAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -25,22 +30,13 @@ security:
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
-        NO_ROLE: ~
+        NO_ROLE: ROLE_USER
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # Visiteur non authentifié
-        # URL "/" (et uniquement celle-là) : pas besoin d'authentification
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #client authentifié et non administrateur
-        - { path: ^/(login|register|logout)$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user/profile/edit$, roles: ROLE_USER }
-        - { path: ^/store/(list|add-to-cart)$, roles: ROLE_USER }
-        - { path: ^/cart/(purchase|empty)$, roles: ROLE_USER }
-        #Administrateur
-        - { path: ^/gerer-utilisateurs, roles: ROLE_ADMIN }
-        - { path: ^/ajouter-produit, roles: ROLE_ADMIN }
+        - { path: ^/$, roles: PUBLIC_ACCESS }
+        - { path: ^/login$, roles: PUBLIC_ACCESS }
+        - { path: ^/admin$, roles: ROLE_ADMIN }
 
 
 when@test:
