@@ -5,23 +5,16 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[  ORM\Table(name:"i23_users"),
-    ORM\Entity(repositoryClass: UserRepository::class),
-    UniqueEntity(
-        fields: ['nom', 'prenom'],
-        message: 'Ce couple doit être unique',
-    )]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
-
+    #[ORM\Column]
+    private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $login = null;
@@ -35,26 +28,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $prenom = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $birthday = null;
 
-    #[ORM\OneToOne(inversedBy: 'User', cascade: ['persist', 'remove'])]
-    private ?Panier $Panier = null;
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Panier $panier = null;
 
-    public function __construct()
-    {
-        $this->id=null;
-        $this->nom=null;
-        $this->prenom=null;
-        $this->birthday=null;
-        $this->roles=[];
-    }
     public function getId(): ?int
     {
         return $this->id;
@@ -163,12 +148,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPanier(): ?Panier
     {
-        return $this->Panier;
+        return $this->panier;
     }
 
-    public function setPanier(?Panier $Panier): self
+    public function setPanier(?Panier $panier): self
     {
-        $this->Panier = $Panier;
+        $this->panier = $panier;
 
         return $this;
     }

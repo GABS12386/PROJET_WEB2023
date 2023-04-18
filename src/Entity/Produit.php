@@ -5,9 +5,7 @@ namespace App\Entity;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[  ORM\Table(name:"i23_produits"),
-    ORM\Entity(repositoryClass: ProduitRepository::class)
-]
+#[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
 {
     #[ORM\Id]
@@ -19,24 +17,14 @@ class Produit
     private ?string $libelle = null;
 
     #[ORM\Column]
-    #[Assert\Positive(message: "Le prix doit être positif")]
     private ?float $prix = null;
 
-    #[ORM\Column]
-    #[Assert\PositiveOrZero(message: "La quantité doit être positive ou égale à zero")]
+    #[ORM\Column(nullable: true)]
     private ?int $quantite = null;
 
-    #[ORM\ManyToOne(inversedBy: 'idproduit')]
+    #[ORM\ManyToOne(inversedBy: 'produit')]
     private ?Panier $panier = null;
 
-
-    public function __construct()
-    {
-        $this->panier=null;
-        $this->id=null;
-        $this->libelle=null;
-        $this->prix=null;
-    }
     public function getId(): ?int
     {
         return $this->id;
@@ -71,7 +59,7 @@ class Produit
         return $this->quantite;
     }
 
-    public function setQuantite(int $quantite): self
+    public function setQuantite(?int $quantite): self
     {
         $this->quantite = $quantite;
 
