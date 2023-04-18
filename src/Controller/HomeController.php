@@ -19,7 +19,7 @@ class HomeController extends AbstractController
          if ($user) {
              $message = sprintf('Bienvenue %s  sur notre site web!', $this->getUser()->getRoles()[0]);
          } else {
-             $message = 'Bienvenue sur notre site web!';
+             $message = 'Bienvenue sur notre site web !';
          }
 
          // Afficher la page d'accueil avec le message de bienvenue
