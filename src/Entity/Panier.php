@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Table(name:"i23_paniers")]
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
 class Panier
 {
