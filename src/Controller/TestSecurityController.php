@@ -25,7 +25,7 @@ class TestSecurityController extends AbstractController
 
 
 
-       /* $user2 = new User();
+        $user2 = new User();
         $user2 ->setNom("sadmin")
             ->setPrenom("gilles");
         $hashedPassword = $passwordHasher->hashPassword($user1, 'nimdas');

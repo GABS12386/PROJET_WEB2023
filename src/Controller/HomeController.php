@@ -17,7 +17,7 @@ class HomeController extends AbstractController
 
          // Si l'utilisateur est connecté, afficher un message de bienvenue avec son rôle
          if ($user) {
-             $message = sprintf('Bienvenue %s  sur notre site web!', $this->getUser()->getRoles());
+             $message = sprintf('Bienvenue %s  sur notre site web!', $this->getUser()->getRoles()[0]);
          } else {
              $message = 'Bienvenue sur notre site web!';
          }
