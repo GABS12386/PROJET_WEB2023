@@ -5,16 +5,22 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[  ORM\Table(name:"i23_users"),
+    ORM\Entity(repositoryClass: UserRepository::class),
+    UniqueEntity(
+        fields: ['nom', 'prenom'],
+        message: 'Ce couple doit être unique',
+    )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private $id;
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $login = null;
