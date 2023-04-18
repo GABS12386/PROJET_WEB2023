@@ -6,8 +6,9 @@ use App\Repository\PanierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity(repositoryClass: PanierRepository::class)]
+#[ ORM\Table(name:"i23_paniers"),
+    ORM\Entity(repositoryClass: PanierRepository::class)
+]
 class Panier
 {
     #[ORM\Id]
@@ -17,6 +18,9 @@ class Panier
 
     #[ORM\OneToMany(mappedBy: 'panier', targetEntity: Produit::class)]
     private Collection $idproduit;
+
+    #[ORM\OneToOne(mappedBy: 'Panier', cascade: ['persist', 'remove'])]
+    private ?User $User = null;
 
 
     public function __construct()
@@ -55,6 +59,28 @@ class Panier
                 $idproduit->setPanier(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($User === null && $this->User !== null) {
+            $this->User->setPanier(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($User !== null && $User->getPanier() !== $this) {
+            $User->setPanier($this);
+        }
+
+        $this->User = $User;
 
         return $this;
     }

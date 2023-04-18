@@ -22,6 +22,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private $id;
 
+
     #[ORM\Column(length: 180, unique: true)]
     private ?string $login = null;
 
@@ -42,6 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $birthday = null;
+
+    #[ORM\OneToOne(inversedBy: 'User', cascade: ['persist', 'remove'])]
+    private ?Panier $Panier = null;
 
     public function __construct()
     {
@@ -153,6 +157,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBirthday(\DateTimeInterface $birthday): self
     {
         $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->Panier;
+    }
+
+    public function setPanier(?Panier $Panier): self
+    {
+        $this->Panier = $Panier;
 
         return $this;
     }
