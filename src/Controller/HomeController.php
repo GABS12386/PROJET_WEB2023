@@ -23,7 +23,8 @@ class HomeController extends AbstractController
          }
 
          // Afficher la page d'accueil avec le message de bienvenue
-         return $this->render('Base/menu.html.twig', $user, ['message' => $message]);
+
+         return $this->render('Base/welcome.html.twig', ['message' => $message]);
      }
 
 }
