@@ -14,7 +14,7 @@ class TestSecurityController extends AbstractController
     #[Route('/test/security', name: 'app_test_security')]
     public function index(EntityManagerInterface $em , UserPasswordHasherInterface $passwordHasher): Response
     {
-        $user1 = new User();
+       /* $user1 = new User();
         $user1 ->setLogin("sadmin")
                 ->setNom("Jean")
                 ->setBirthday( new \DateTimeImmutable("02/04/1950"))
@@ -40,8 +40,8 @@ class TestSecurityController extends AbstractController
         $user3 = new User();
         $user3 ->setLogin("rita")
                 ->setNom("Zrour")
-                ->setBirthday(new \DateTimeImmutable("14/09/1965"))
-                ->setRole(["ROLE_USER"])
+                ->setBirthday(new \DateTimeImmutable("07/11/1962"))
+                ->setRoles(["ROLE_USER"])
                 ->setPrenom("Rita");
             $hashedPassword3 = $passwordHasher ->hashPassword($user3,'atir');
             $user3->setPassword($hashedPassword3);
@@ -59,7 +59,7 @@ class TestSecurityController extends AbstractController
 
         $em->persist($user4);
 
-        $em->flush();
+        $em->flush();*/
 
 
        return $this->redirectToRoute("accueil_index");
